@@ -44,6 +44,9 @@ class Graph {
     //Only removes connection between two nodes, nodes remain as they are
     void removeEdge(std::string sourceNode, std::string destinationNode);
 
+    //removes all edges connected to a given node (whether source or destianation)
+    void removeEdgesOfNode(const std::string& locationName);
+    
     //return index of a node with the given location name
     int getIndex(const std::string& name);
 
