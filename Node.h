@@ -13,7 +13,7 @@ class Node {
     //position of the node in the vector list
     int index; 
     //name of the location/place the node represents
-    std::string locationName;
+    std::string name;
     //distance from the source node, used in pathfinding algorithms
     double distanceFromSource;
     //pointer to the previous node in the path, used in pathfinding algorithms
@@ -23,7 +23,7 @@ class Node {
 
     public:
     //CONSTRUCTORS
-    Node(int index, std::string locationName);
+    Node(int index, const std::string& name);
     Node(int index);
 
     //METHODS
@@ -35,6 +35,9 @@ class Node {
     bool isVisited();
     void setLocationName(const std::string& name);
     void setVisited(bool status);
+    void setPreviousNode(Node* prev);
+    void setDistanceFromSource(double distance);
+
 
 };
 
