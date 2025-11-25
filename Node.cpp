@@ -6,7 +6,7 @@ Node::Node(int index, const std::string& name) {
     distanceFromSource = 0.0;
     previousNode = nullptr;
     visited = false;
-    x = y
+    x = y = 0;
 }  
 
 Node::Node(int index) {
@@ -79,3 +79,4 @@ void Node::setX(int x) {
 void Node::setY(int y) {
     this->y = y;
 }
+
