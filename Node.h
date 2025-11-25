@@ -20,11 +20,17 @@ class Node {
     Node *previousNode;
     //indicates whether the node has been visited, used in pathfinding algorithms
     bool visited;
+    //x coordinate on map
+    int x;
+    //y coordinate on map
+    int y;
 
     public:
     //CONSTRUCTORS
     Node(int index, const std::string& name);
     Node(int index);
+    Node(int index, const std::string& name, int x, int y);
+
 
     //METHODS
     //getters and setters
@@ -37,6 +43,10 @@ class Node {
     void setVisited(bool status);
     void setPreviousNode(Node* prev);
     void setDistanceFromSource(double distance);
+    int getX();
+    int getY();
+    void setX(int x);
+    void setY(int y);
 
 
 };
