@@ -20,6 +20,22 @@ void Graph::addNode(const std::string& locationName){
     numberOfNodes++; //Increments the total number of nodes in the graph
 }
 
+void Graph::addNode(const std::string& locationName, int x, int y){
+    Nodes.push_back(new Node(idxCounter, locationName, x, y));
+    //Creates a node with auto incremented index, given location name and coordinates
+  //Adds the new node to the nodes list
+    idxCounter++; //Increments the index counter for the next node
+    numberOfNodes++; //Increments the total number of nodes in the graph
+}
+
+void Graph::addNode(int x, int y){
+    Nodes.push_back(new Node(idxCounter));
+    //Creates a node with auto incremented index and default location name "Unknown" and given coordinates
+  //Adds the new node to the nodes list
+    idxCounter++; //Increments the index counter for the next node
+    numberOfNodes++; //Increments the total number of nodes in the graph
+}
+
 void Graph::addEdge(const std::string& sourceLocation, const std::string& destinationLocation, double weight){
     int sourceIndex = getIndex(sourceLocation); //gets index of the source location
     int destinationIndex = getIndex(destinationLocation); //gets index of destination location
