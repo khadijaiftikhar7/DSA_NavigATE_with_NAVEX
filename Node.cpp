@@ -6,6 +6,7 @@ Node::Node(int index, const std::string& name) {
     distanceFromSource = 0.0;
     previousNode = nullptr;
     visited = false;
+    x = y
 }  
 
 Node::Node(int index) {
@@ -14,6 +15,17 @@ Node::Node(int index) {
     distanceFromSource = 0.0;
     previousNode = nullptr;
     visited = false;
+    x = y = 0;
+}
+
+Node::Node(int index, const std::string& name, int x, int y) {
+    this->index = index;
+    this->name = name;
+    distanceFromSource = 0.0;
+    previousNode = nullptr;
+    visited = false;
+    this->x = x;
+    this->y = y;
 }
 
 int Node::getIndex() {
@@ -50,4 +62,20 @@ void Node::setPreviousNode(Node* prev) {
 
 void Node::setDistanceFromSource(double distance) {
     distanceFromSource = distance;
+}
+
+int Node::getX() {
+    return x;
+}
+
+int Node::getY() {
+    return y;
+}
+
+void Node::setX(int x) {
+    this->x = x;
+}
+
+void Node::setY(int y) {
+    this->y = y;
 }
