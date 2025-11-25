@@ -35,6 +35,12 @@ class Graph {
     //Creates and adds a node with given location to locationNames list. Creates empty vector for it in the neighboursList. Added node is not connected to the graph yet
     void addNode(const std::string& name);
 
+    //Creates and adds a node with given location and coordinates to locationNames list. Creates empty vector for it in the neighboursList. Added node is not connected to the graph yet
+    void addNode(const std::string& name, int x, int y);
+
+    //Creates and adds a node with default name "Unknown" to locationNames list. Creates empty vector for it in the neighboursList. Added node is not connected to the graph yet
+    void addNode(int x, int y);
+
     //Connects two nodes with an edge of cost = weight
     void addEdge(const std::string& sourceNode, const std::string& destinationNode, double weight);
 
@@ -53,6 +59,7 @@ class Graph {
     //return name of location/place of a node with the given index
     std::string getLocation(int index);
 
+    //gets number of nodes in the graph
     int getNumberOfNodes();
 
 };
