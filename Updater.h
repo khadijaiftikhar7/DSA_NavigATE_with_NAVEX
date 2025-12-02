@@ -6,21 +6,26 @@
 #include <string>
 #include <unordered_set>
 
+// Forward declaration
+class WeatherManager;
+
 enum Weather { CLEAR, RAIN, STORM, FLOOD };
 
 class Updater {
-
 private:
     Graph* graph;
+    WeatherManager* weatherManager;
     Weather currentWeather;
     std::unordered_set<std::string> restrictedZones;
 
 public:
     Updater(Graph* g);
+    Updater(Graph* g, WeatherManager* wm);
 
     // WEATHER HANDLING
     void setWeather(Weather w);
     void applyWeatherEffects();
+    void updateWeatherRealTime();
 
     // ROAD / EDGE UPDATE
     void updateEdgeWeight(const std::string& src, const std::string& dest, double newWeight);
