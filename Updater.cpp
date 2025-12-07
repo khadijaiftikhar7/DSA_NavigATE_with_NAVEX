@@ -24,7 +24,8 @@ void Updater::setWeather(Weather w) {
 }
 
 void Updater::applyWeatherEffects() {
-    for (int i = 0; i < graph->getNumNodes(); i++) {
+    int n = graph->getNumberOfNodes();
+    for (int i = 0; i < n; ++i) {
         for (auto& edge : graph->neighboursList[i]) {
             if (currentWeather == CLEAR) continue;
             if (currentWeather == RAIN) {
@@ -46,15 +47,21 @@ void Updater::updateWeatherRealTime() {
         std::cout << "WeatherManager not initialized!\n";
         return;
     }
-    
+
     std::cout << "\nFetching live weather for all nodes...\n";
-    for (int i = 0; i < graph->getNumNodes(); i++) {
-        Node* n = graph->getNode(i);
-        WeatherInfo w = weatherManager->fetchWeather(n->lat, n->lon);
+    int n = graph->getNumberOfNodes();
+    for (int i = 0; i < n; ++i) {
+        // Access Node* via public Nodes vector and use getters
+        Node* nodePtr = graph->Nodes[i];
+        if (!nodePtr) continue;
+        double lat = nodePtr->getX(); // your Node stores x,y — using them as coordinates
+        double lon = nodePtr->getY();
+
+        WeatherInfo w = weatherManager->fetchWeather(lat, lon);
         double factor = 1.0;
         if (w.isStorm) factor = 1.8;
         else if (w.isRain) factor = 1.3;
-        
+
         for (auto& e : graph->neighboursList[i]) {
             e.second *= factor;
             if (w.isFlood) {
@@ -73,7 +80,7 @@ void Updater::updateEdgeWeight(const std::string& src, const std::string& dest, 
     int u = graph->getIndex(src);
     int v = graph->getIndex(dest);
     if (u == -1 || v == -1) return;
-    
+
     for (auto& edge : graph->neighboursList[u]) {
         if (edge.first == v) {
             edge.second = newWeight;
@@ -114,16 +121,18 @@ void Updater::clearRestrictedZones() {
 void Updater::reRoute(const std::string& source, const std::string& dest) {
     int src = graph->getIndex(source);
     int dst = graph->getIndex(dest);
-    auto path = Dijkstra(*graph, src, dst);
+    auto path = dijkstra(*graph, src, dst); // calling dijkstra function in PathFinder.cpp
     if (path.empty()) {
         std::cout << "No available path.\n";
         return;
     }
     std::cout << "Shortest Path:\n";
-    for (int id : path) {
-        std::cout << graph->getLocation(id) << " -> ";
+    for (size_t idx = 0; idx < path.size(); ++idx) {
+        int id = path[idx];
+        std::cout << graph->getLocation(id);
+        if (idx + 1 < path.size()) std::cout << " -> ";
     }
-    std::cout << "END\n";
+    std::cout << " -> END\n";
 }
 
 // --------------------------------------------
