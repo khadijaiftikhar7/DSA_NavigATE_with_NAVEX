@@ -1,8 +1,16 @@
 #pragma once
 #include <vector>
-#include "Graph.h" //importing this from Kdj iftikhar
-using namespace std;
+#include "Graph.h"
 
-using nodeid=int; 
-vector<nodeid> Dijkstra( const Graph& graph, nodeid start, nodeid end);
-vector<nodeid> AStar(const Graph& graph, nodeid start, nodeid end);
+using nodeid = int;
+
+struct PathResult {
+    std::vector<nodeid> path;
+    double distance;
+    bool success;
+
+    PathResult() : distance(0), success(false) {}
+};
+
+PathResult dijkstra(const Graph& graph, nodeid start, nodeid end);
+PathResult AStar(const Graph& graph, nodeid start, nodeid end);

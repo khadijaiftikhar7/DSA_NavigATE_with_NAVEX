@@ -1,5 +1,8 @@
+#define _HAS_STD_BYTE 0
+
 #include "Updater.h"
 #include "WeatherManager.h"
+#include "PathFinder.h"
 #include <iostream>
 
 Updater::Updater(Graph* g) {
@@ -51,10 +54,11 @@ void Updater::updateWeatherRealTime() {
     std::cout << "\nFetching live weather for all nodes...\n";
     int n = graph->getNumberOfNodes();
     for (int i = 0; i < n; ++i) {
-        // Access Node* via public Nodes vector and use getters
-        Node* nodePtr = graph->Nodes[i];
+        Node* nodePtr = nullptr;
+        if (i >= 0 && i < (int)graph->Nodes.size()) nodePtr = graph->Nodes[i];
         if (!nodePtr) continue;
-        double lat = nodePtr->getX(); // your Node stores x,y — using them as coordinates
+
+        double lat = nodePtr->getX();
         double lon = nodePtr->getY();
 
         WeatherInfo w = weatherManager->fetchWeather(lat, lon);
@@ -121,18 +125,25 @@ void Updater::clearRestrictedZones() {
 void Updater::reRoute(const std::string& source, const std::string& dest) {
     int src = graph->getIndex(source);
     int dst = graph->getIndex(dest);
-    auto path = dijkstra(*graph, src, dst); // calling dijkstra function in PathFinder.cpp
-    if (path.empty()) {
+    if (src == -1 || dst == -1) {
+        std::cout << "Invalid source or destination.\n";
+        return;
+    }
+
+    PathResult result = dijkstra(*graph, src, dst);
+    
+    if (!result.success || result.path.empty()) {
         std::cout << "No available path.\n";
         return;
     }
+    
     std::cout << "Shortest Path:\n";
-    for (size_t idx = 0; idx < path.size(); ++idx) {
-        int id = path[idx];
+    for (size_t idx = 0; idx < result.path.size(); ++idx) {
+        int id = result.path[idx];
         std::cout << graph->getLocation(id);
-        if (idx + 1 < path.size()) std::cout << " -> ";
+        if (idx + 1 < result.path.size()) std::cout << " -> ";
     }
-    std::cout << " -> END\n";
+    std::cout << "\n";
 }
 
 // --------------------------------------------
