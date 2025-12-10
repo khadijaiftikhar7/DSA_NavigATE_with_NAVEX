@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build NAVEX Project",
+            "type": "shell",
+            "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+         "args": [
+    "-std=gnu++17",
+    "-g",
+
+    "D:\\DSA_NAVIGATE_WITH_NAVEX-ayesha-ui-module\\Main.cpp",
+    "D:\\DSA_NAVIGATE_WITH_NAVEX-ayesha-ui-module\\Graph.cpp",
+    "D:\\DSA_NAVIGATE_WITH_NAVEX-ayesha-ui-module\\GraphLoader.cpp",
+    "D:\\DSA_NAVIGATE_WITH_NAVEX-ayesha-ui-module\\InputHandler.cpp",
+    "D:\\DSA_NAVIGATE_WITH_NAVEX-ayesha-ui-module\\Node.cpp",
+    "D:\\DSA_NAVIGATE_WITH_NAVEX-ayesha-ui-module\\PathFinder.cpp",
+    "D:\\DSA_NAVIGATE_WITH_NAVEX-ayesha-ui-module\\RouteHistory.cpp",
+    "D:\\DSA_NAVIGATE_WITH_NAVEX-ayesha-ui-module\\UI.cpp",
+    "D:\\DSA_NAVIGATE_WITH_NAVEX-ayesha-ui-module\\Updater.cpp",
+    "D:\\DSA_NAVIGATE_WITH_NAVEX-ayesha-ui-module\\WeatherManager.cpp",
+
+    "-lwininet",   // ⬅️ ADD THIS LINE
+
+    "-o",
+    "D:\\DSA_NAVIGATE_WITH_NAVEX-ayesha-ui-module\\Main.exe"
+],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
+        }
+    ]
+}
