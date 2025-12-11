@@ -1,0 +1,22 @@
+
+I implemented both pathfinding algorithms — Dijkstra and A* ,because each plays a different but important role in NAVEX.
+
+Dijkstra does not use coordinates.
+It explores the graph uniformly and always produces the guaranteed optimal path in any weighted map.
+It is reliable even if the input data (like node positions) is incomplete or inaccurate.
+
+A* uses coordinates and a Euclidean heuristic to guide the search toward the destination.
+This makes A* significantly faster and more efficient, especially in a city-map environment where node positions are meaningful.
+
+In NAVEX, A* is the primary algorithm for real-time navigation because it is faster and more practical for large road networks.
+However, in situations where:
+
+coordinate data is missing,
+
+coordinates are unreliable or noisy, or
+
+a fallback method is needed for verification,
+
+NAVEX will switch to Dijkstra to ensure correctness and robustness.
+
+This dual-algorithm system provides both high performance and high reliability, similar to how real navigation systems handle pathfinding.
