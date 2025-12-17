@@ -28,7 +28,7 @@ void Graph::addNode(const std::string& locationName, int x, int y){
     numberOfNodes++; //Increments the total number of nodes in the graph
 }
 
-void Graph::addNode(int x, int y){
+void Graph::addNode(){
     Nodes.push_back(new Node(idxCounter));
     //Creates a node with auto incremented index and default location name "Unknown" and given coordinates
   //Adds the new node to the nodes list
@@ -130,3 +130,4 @@ std::string Graph::getLocation(int index) {
 int Graph::getNumberOfNodes() {
     return numberOfNodes;
 }
+
