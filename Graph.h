@@ -39,7 +39,7 @@ class Graph {
     void addNode(const std::string& name, int x, int y);
 
     //Creates and adds a node with default name "Unknown" to locationNames list. Creates empty vector for it in the neighboursList. Added node is not connected to the graph yet
-    void addNode(int x, int y);
+    void addNode();
 
     //Connects two nodes with an edge of cost = weight
     void addEdge(const std::string& sourceNode, const std::string& destinationNode, double weight);
@@ -65,3 +65,4 @@ class Graph {
 };
 
 #endif
+
