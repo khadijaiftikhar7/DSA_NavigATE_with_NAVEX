@@ -2,9 +2,7 @@
 
 A console-based navigation system that finds the shortest routes between locations in Islamabad using graph algorithms.
 ---
-## Member name: Ayesha Saddiqua
-## CMS ID: 515152
-##  My Contributions
+
 
 ### 1. Route History System (`RouteHistory.cpp` & `RouteHistory.h`)
 
